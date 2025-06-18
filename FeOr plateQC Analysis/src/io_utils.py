@@ -18,12 +18,14 @@ def create_directories(parent_dir, sub_folders, run_folder=None):
     
     if run_folder is None:
         run_folder = input("Enter a folder name for this run:")
-    
+
+    # Create base directory for the run
     base_dir = os.path.join(parent_dir, run_folder)
     os.makedirs(base_dir, exist_ok=True)
 
     sub_dir = {}
 
+    # Create subfolders and store the path in a dictionary
     for folder in sub_folders:
         path = os.path.join(base_dir, folder)
         os.makedirs(path, exist_ok=True)
@@ -46,9 +48,14 @@ def raw_indices(raw_df):
     Raises: 
     - ValueError: Raises an error if the number of start and end markers does not match. 
     """
-    
+
+    # Find all the rows that marks the beginning of a plate block using "Plate:"
     start_indices = raw_df.index[raw_df.iloc[:, 0] == "Plate:"].tolist()
+
+    # Find all the rows that marks the end of a plate block using "~End:"
     end_indices = raw_df.index[raw_df.iloc[:, 0] == "~End"].tolist()
+
+    # Check: Check to make sure each plate block has a beginning and end
     if len(start_indices) != len(end_indices):
         raise ValueError("Number of indices doesn't match each other")
     return list(zip(start_indices, end_indices))
