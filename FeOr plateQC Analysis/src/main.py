@@ -20,6 +20,13 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 def main():
+    """
+    This is the main entry point for the Plate QC processing program.
+        - Prompts the user to select a CSV input file and the parent directory to store the data
+        - Runs the plate processing pipeline 
+        - Displays and saves the QC metric summaries for each plate.
+    """
+    
     try:
         # Hide the Tk window
         Tk().withdraw()
@@ -38,7 +45,7 @@ def main():
             logger.error(f"No file was selected!")
             exit()
 
-        # Prompt the user to select a parent directory for the analysis to be sotred
+        # Prompt the user to select a parent directory for the analysis to be stored
         parent_dir = askdirectory(title=f"Select the parent directory for this run to be stored")
 
         # Exit if no directory is selected
@@ -49,10 +56,10 @@ def main():
         # Create sub directories for storing processed data and results
         output_folders = create_directories(parent_dir, ["plateRun", "controlsData", "qcPlots", "summary"], run_folder=None)
 
-        # Process plate
+        # Run the plate processing pipeline
         results = process_plate(raw_file, output_folders)
 
-        # Assign an empty list 
+        # Assign an empty list for QC metrics to be stored
         display_data = []
 
         # Collect the QC metric data for each plate
@@ -63,19 +70,19 @@ def main():
                 f"{data['Z:']:.3f}"
             ])
 
-        # Print summary in a tabular form
+        # Display summary in the console in a tabular format
         summary_table = tabulate(display_data, headers=["Compounds", "Signal to Background", "Z'"], tablefmt="grid")
         logger.info(f"Summary Results:\n" + summary_table)
 
 
-        # Save as a CSV file in the summary folder
+        # Save summary results as a CSV in the summary folder
         summary_df = pd.DataFrame(display_data, columns=["Compounds", "Signal to Background", "Z'"])
         summary_path = os.path.join(output_folders["summary"], "RunSummary.csv")
         summary_df.to_csv(summary_path, index=False)
         logger.info(f"Summary Results are saved to: {summary_path}")
 
     except Exception as e:
-        logger.error(f"Error has occurred: {e}")
+        logger.error(f"Error has occurred: {e}", exc_info=True)
 
 
 if __name__ == "__main__":
