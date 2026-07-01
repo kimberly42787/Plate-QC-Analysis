@@ -6,6 +6,7 @@ from tabulate import tabulate
 from tkinter import Tk
 from tkinter.filedialog import askopenfilename, askdirectory
 import logging
+from datetime import datetime
 
 from pipeline import process_plate
 from io_utils import create_directories
@@ -45,17 +46,20 @@ def main():
             logger.error(f"No file was selected!")
             exit()
 
-        # Prompt the user to select a parent directory for the analysis to be stored
-        parent_dir = askdirectory(title=f"Select the parent directory for this run to be stored")
+        # Prompt user to select the main analysis folder
+        logger.info("Please select the parent folder where this analysis run should be saved.")
+        parent_dir = askdirectory(title="Select the analysis folder")
 
-        # Exit if no directory is selected
         if not parent_dir:
-            print(f"No directory selected!")
+            logger.error("No analysis folder was selected!")
             exit()
 
-        # Create sub directories for storing processed data and results
-        output_folders = create_directories(parent_dir, ["plateRun", "controlsData", "qcPlots", "summary"], run_folder=None)
-
+        # Create subdirectories inside this run folder
+        output_folders = create_directories(
+            parent_dir,
+            ["plateRun", "controlsData", "qcPlots", "summary"],
+            run_folder=None
+        )
         # Run the plate processing pipeline
         results = process_plate(raw_file, output_folders)
 
@@ -87,3 +91,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

@@ -47,11 +47,11 @@ def plot_data(df, safe_plate_name, s_b, z_prime):
     plt.ylabel("FL Ratio, Normalized to Vehicle")
     plt.margins(x = 0.25)
     plt.yticks(np.arange(0, 5, 1))
-    plt.title(f"Plate QC - {safe_plate_name}")
+    plt.title(f"Quality Control - {safe_plate_name}")
 
 
     # Annotation text to show QC metrics
-    annotation_text = f"S/B: {s_b:.3f}\nZ': {z_prime:.3f}"
+    annotation_text = f"QC Metrics \n S/B Ratio: {s_b:.3f}\nZ' Factor: {z_prime:.3f}"
 
     # Create the annotation box with the annotation_text (QC metrics)
     plt.gca().text(

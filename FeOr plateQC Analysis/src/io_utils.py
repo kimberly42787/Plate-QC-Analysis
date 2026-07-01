@@ -1,5 +1,7 @@
 import os
 import pandas as pd
+from datetime import datetime
+
 
 def create_directories(parent_dir, sub_folders, run_folder=None):
     """
@@ -18,6 +20,8 @@ def create_directories(parent_dir, sub_folders, run_folder=None):
     
     if run_folder is None:
         run_folder = input("Enter a folder name for this run:")
+
+        run_folder = datetime.now().strftime(f"{run_folder}_%Y-%m-%d_%H-%M-%S")
 
     # Create base directory for the run
     base_dir = os.path.join(parent_dir, run_folder)
