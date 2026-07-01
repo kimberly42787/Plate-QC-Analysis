@@ -10,7 +10,7 @@ I wrote this pipeline to automate those steps so every plate is processed consis
 
 > **Note:** This repository uses example/test data only. No proprietary data or internal company information is included.
 
----
+
 
 ## What the pipeline does
 
@@ -23,7 +23,7 @@ Given a raw CSV export from a plate reader, the pipeline will:
 - Generate QC plots for each plate
 - Export cleaned data and figures
 
----
+
 
 ## Why I built it
 
@@ -31,7 +31,7 @@ The goal wasn't just to calculate a few metrics—it was to remove repetitive ma
 
 Instead of copying data into spreadsheets and running calculations by hand, this pipeline performs the same workflow automatically every time. That makes the analysis faster, easier to reproduce, and less prone to human error.
 
----
+
 
 ## QC Metrics
 
@@ -49,7 +49,7 @@ A commonly used assay quality metric that evaluates both signal separation and v
 | 0–0.5 | Marginal |
 | < 0 | Poor |
 
----
+
 
 ## Workflow
 
@@ -75,7 +75,7 @@ Generate Plots
 Export Results
 ```
 
----
+
 
 ## Technologies
 
@@ -86,7 +86,7 @@ Export Results
 - seaborn
 - tabulate
 
----
+
 
 ## Project Structure
 
@@ -106,7 +106,7 @@ Plate-QC-Analysis/
 └── README.md
 ```
 
----
+
 
 ## Output
 
@@ -117,7 +117,7 @@ The pipeline generates:
 - Strip plots for visual inspection
 - Clean data ready for downstream analysis
 
----
+
 
 ## Skills Demonstrated
 
@@ -131,7 +131,7 @@ This project highlights experience with:
 - Modular code organization
 - Logging and error handling
 
----
+
 
 ## Future Improvements
 
