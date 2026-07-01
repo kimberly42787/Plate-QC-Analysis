@@ -27,10 +27,9 @@ Given a raw CSV export from a plate reader, the pipeline will:
 
 ## Why I built it
 
-The goal wasn't just to calculate a few metrics—it was to remove repetitive manual work.
+The goal was to automate this analysis process. 
 
 Instead of copying data into spreadsheets and running calculations by hand, this pipeline performs the same workflow automatically every time. That makes the analysis faster, easier to reproduce, and less prone to human error.
-
 
 
 ## QC Metrics
